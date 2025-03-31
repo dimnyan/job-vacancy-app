@@ -9,7 +9,7 @@ export async function createJWT(payload) {
     .setIssuedAt()
     .setIssuer('/api/auth/login')
     .setAudience('/admin')
-    .setExpirationTime('2m')
+    .setExpirationTime('30m')
     .encrypt(secret)
 }
 

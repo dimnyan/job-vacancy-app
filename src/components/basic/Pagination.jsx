@@ -21,7 +21,7 @@ const Pagination = ({currentPage, maxPages, onPageChange}) => {
 
   return (
     <select onChange={(e) => onPageChange(e.target.value)}
-            className="select border border-slate-700 select-sm max-w-xs bg-transparent">
+            className="select border border-slate-700 mt-5 select-sm max-w-xs bg-transparent">
       {generatePagination()}
     </select>
   )

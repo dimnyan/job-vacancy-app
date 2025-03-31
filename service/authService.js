@@ -17,7 +17,7 @@ export async function loginService(payload) {
       return {status: "error", message: data.message};
     }
     if (data.message === "Authorized") {
-      const jwt = await createJWT({id: data.id});
+      const jwt = await createJWT({id: data.data.user_id});
       localStorage.setItem("token", jwt);
       return {status: "success", message: data.message};
     }
@@ -77,19 +77,42 @@ export async function checkUserCredential(id) {
   try {
     const response = await fetch(`/api/user/${id}`)
     const data = await response.json()
+    let profile = {}
+    if (data.data.user.role_id === 2) {
+      profile = await getRecruiterProfile(id)
+    } else if (data.data.user.role_id === 3) {
+      profile = await getApplicantsProfile(id)
+    }
     if (!response.ok) {
       toast.error(data.message);
       return {status: "error", message: data.message};
     }
-    if (!data.message){
+    if (!data.message) {
       return {status: "error", message: data.message};
     }
-    return {status: "success", message: data};
+    return {
+      status: "success", data: {
+        ...profile.data.user, role_id: data.data.user.role_id
+      }
+    };
   } catch (error) {
     console.error(error)
   }
 }
 
+async function getRecruiterProfile(id) {
+  const response = await fetch(`/api/user/recruiter/${id}`)
+  return await response.json()
+}
+
+async function getApplicantsProfile(id) {
+  const response = await fetch(`/api/user/applicant/${id}`)
+  return await response.json()
+}
+
+
 export function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("userFullname");
+  localStorage.removeItem("companyId");
 }

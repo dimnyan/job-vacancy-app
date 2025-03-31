@@ -19,12 +19,12 @@ const Table = ({data, page, columns, pageChange}) => {
           <table className="table">
             {/* head */}
             <thead>
-            <tr className="text-slate-700">
-              <th></th>
-              {columns?.map((column, index) => (
-                <th key={index} className="capitalize">{columns[index]}</th>
-              ))}
-            </tr>
+              <tr className="text-slate-700">
+                <th></th>
+                {columns?.map((column, index) => (
+                  <th key={index} className="capitalize">{columns[index]}</th>
+                ))}
+              </tr>
             </thead>
 
             <tbody>

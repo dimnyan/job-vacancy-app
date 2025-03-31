@@ -8,7 +8,11 @@ const Breadcrumbs = ({path}) => {
             path.length - 1 === index ?
               <li key={index} className="capitalize text-slate-900">{item}</li>
               :
-              <li key={index}><Link href={`/${item}`} className="capitalize text-slate-600">{item}</Link></li>
+              <li key={index} className="capitalize text-slate-900">
+                <Link href={`/${item}`} className="capitalize text-slate-600">
+                  {item}
+                </Link>
+              </li>
           )
         )}
       </ul>

@@ -1,18 +1,14 @@
+import prisma from "../../../../../../lib/prisma";
 import {NextResponse} from "next/server";
-import {STATUS_OK} from "../../../../../lib/constant";
-import prisma from "../../../../../lib/prisma"
+import {STATUS_OK} from "../../../../../../lib/constant";
 
 export async function GET(request, {params}) {
   try {
     const id = (await params).id
-    const user = await prisma.m_users.findUnique({
+    const user = await prisma.m_applicants.findFirst({
       where: {
         user_id: Number(id),
       },
-      select: {
-        username: true,
-        role_id: true,
-      }
     })
 
     return NextResponse.json({
