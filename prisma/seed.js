@@ -4,23 +4,22 @@ const prisma = new PrismaClient();
 
 async function main() {
   // roles
-  const roles = await prisma.m_roles.createMany({
+  await prisma.m_roles.createMany({
     data: [
       {
-        id: 1,
+        role_id: 1,
         role_name: "Super Admin",
       },
       {
-        id: 2,
+        role_id: 2,
         role_name: "Recruiter",
       },
       {
-        id: 3,
+        role_id: 3,
         role_name: "User",
       },
     ]
   })
-  console.log(roles)
 }
 
 main()
